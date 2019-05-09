@@ -1,0 +1,35 @@
+<html>
+<head>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" type="text/javascript"></script>
+</head>	
+<body>
+<form>
+<div id="caja1" class="caja1">
+	<input name="campo1" class="numeros" type="text" value="11"><br>
+	<input name="campo2" class="numeros" type="text" value="12"><br>
+	<input name="campo3" class="numeros" type="text" value="13"><br>
+</div>
+<div id="caja2" class="caja2">
+	<input name="campo4" class="numeros" type="text" value="21"><br>
+	<input name="campo5" class="numeros" type="text" value="22"><br>
+	<input name="campo6" class="numeros" type="text" value="23"><br>
+</div>
+<br><br>
+<input type="button" id="boton" value="leer" onClick="tomarElementos(2)">
+</form>
+<script>
+
+function tomarElementos(num)
+{
+	var campo = "";
+	var valor = "";
+  	var maximoElementos = $("#caja"+num+" .numeros").size();
+	for(i = 0; i<maximoElementos; i++){
+		campo = campo+$("#caja"+num+" .numeros:eq("+i+")").attr('name')+"#";
+		valor = valor+$("#caja"+num+" .numeros:eq("+i+")").val()+"#";
+	}
+	alert("CAMPOS: "+campo+"\nVALORES: "+valor);
+}
+</script>
+</body>
+</html>

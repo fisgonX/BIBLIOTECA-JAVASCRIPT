@@ -1,0 +1,57 @@
+<html>
+<head>
+<script>
+	var url1 = "https://www.google.es";
+	var url2 = "http://<?=$_SERVER['HTTP_HOST'].$_SERVER['PHP_SELF']?>";
+
+	function MakeIframeFullHeight(iframeElement)
+	{
+ 		alert(iframeElement);
+ 		iframeElement.style.width = "100%";
+		var ifrD = iframeElement.contentDocument || iframeElement.contentWindow.document;
+    	var mHeight = parseInt( window.getComputedStyle( ifrD.documentElement).height );  // Math.max( ifrD.body.scrollHeight, .. offsetHeight, ....clientHeight,
+		var margins = ifrD.body.style.margin + ifrD.body.style.padding + ifrD.documentElement.style.margin + ifrD.documentElement.style.padding;
+    	if (margins=="") { margins=0;  ifrD.body.style.margin="0px"; }
+    	(function() {
+			var interval = setInterval(function() {
+				if (ifrD.readyState  == 'complete') {
+            	iframeElement.style.height  = (parseInt(window.getComputedStyle( ifrD.documentElement).height) + margins+1) +"px";
+					setTimeout( function(){ clearInterval(interval); }, 1000 );
+				} 
+       	},1000)
+    	})();
+	}
+	
+	var porcentaje = 20;
+	var ancho = screen.width-(parseInt(screen.width)*(porcentaje/100));
+	var alto = screen.height-(parseInt(screen.height)*(porcentaje/100));
+	
+	function abrirVentana()
+	{
+		var top = window.screen.height - alto;
+		top = top > 0 ? top/2 : 0;
+	            
+		var left = window.screen.width - ancho;
+		left = left > 0 ? left/2 : 0;
+
+		var uploadWin = window.open(url1,"myWindow","toolbar=0,location=0,directories=0,status=0,menubar=0,scrollbars=0,resizable=0,width="+ancho+",height="+alto + ",top=" + top + ",left=" + left);
+	   uploadWin.moveTo(left, top);
+	   uploadWin.focus();
+   }
+
+   function abrirVentana2()
+   {
+		window.open(url1,"myWindow","toolbar=0,location=0,directories=0,status=0,menubar=0,scrollbars=0,resizable=0,width=screen.width,height=screen.height,top=0,left=0");
+	}	
+</script>
+</head>
+<body>
+	<form>
+		<input type="button" onclick="abrirVentana()" value="abrir ventana 1"><br><br>
+		<input type="button" onclick="abrirVentana2()" value="abrir ventana 2"><br><br>
+		<input type="button" onclick="MakeIframeFullHeight(document.getElementById('myFrame'))" value="frame grande"><br><br>
+	</form>
+	<iframe id="myFrame" src="http://fancyapps.com/fancybox/3/"></iframe>
+	<a href="javascript:void(0);" onclick="window.open('https://www.facebook.com/sharer.php?u=http://www.guiarte.com/','ventanacompartir', 'toolbar=0, status=0, width=650, height=450');">Compartir con popup</a>
+</body>
+</html>
