@@ -1,0 +1,38 @@
+<html>
+<head>
+	<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+	<script>
+		function verPassword(num)
+		{
+	  		//document.getElementById("foto"+num).style.display = "none";
+	  		document.getElementById("password"+num).style.display = "block";
+		}
+	</script>
+	<style>
+		.padre, .hijo {
+			text-align:center;
+			vertical-align: middle;
+			background-size: 200px 100px;
+		}
+		.padre:hover {
+			cursor: pointer;
+		}
+		.hijo {
+			display: none;
+		}
+		.rgba{
+			background-color:rgba(0,0,0,0.4);
+   		width:200px;
+   		height:100px;
+		}
+	</style>
+</head>
+<body>
+<?php for ($i=1;$i<=2; $i++) { ?>
+<div onclick="verPassword(<?=$i?>)" class="padre" style="background-image: url('albir<?=$i?>.jpg');width:200px; height:100px">
+	<div id="password<?=$i?>" class="hijo rgba"><br><br><input type="text" placeholder="contraseña" style="background-color: #fffff"></div>
+</div>
+<br><br>
+<?php } ?>
+</body>
+</html>
